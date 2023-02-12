@@ -99,7 +99,7 @@ const questions = [
     {
         type: "input",
         name: "credits",
-        message: "Provide a list of collaborators and their GitHub profiles, tutorials, or third-party assets that require attribution if any:",
+        message: "Provide any collaborators, tutorials, or third-party assets that require attribution if any:",
         validate: creditInput => {
             if (creditInput) {
                 return true;
@@ -130,11 +130,31 @@ const questions = [
     }
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// Function to write the README files
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        // If there is an error
+        if (err) {
+            return console.log(err)
+        } else {
+            console.log("Your README has been created.")
+        }
+    })
+};
 
-// TODO: Create a function to initialize app
-function init() {}
+// Function to initialize the app
+function init() {
+    return inquirer.prompt(questions);
+}
 
 // Function call to initialize app
-init();
+init()
+    .then(input => {
+        return generateMarkdown(input);
+    })
+    .then(readmeAnswers => {
+        return writeToFile(readmeAnswers);
+    })
+    .catch(err => {
+        console.log(err);
+    });
