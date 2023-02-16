@@ -97,19 +97,6 @@ const questions = [
         }
     },
     {
-        type: "input",
-        name: "credits",
-        message: "Provide any collaborators, tutorials, or third-party assets that require attribution if any:",
-        validate: creditInput => {
-            if (creditInput) {
-                return true;
-            } else {
-                console.log("It is required to give credit to those who helped collaborate with your project.");
-                return false;
-            }
-        }
-    },
-    {
         type: "confirm",
         name: "confirmLicenses",
         message: "Would you like to include a license?",
@@ -119,7 +106,7 @@ const questions = [
         type: "list",
         name: "licenses",
         message: "Which license would you like to include?",
-        choices: ["MIT", "GPLv3", "Apache", "ISC"],
+        choices: ["MIT", "GPLv3", "Apache"],
         when: ({confirmLicenses}) => {
             if (confirmLicenses) {
                 return true;
@@ -131,8 +118,8 @@ const questions = [
 ];
 
 // Function to write the README files
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
+function writeToFile(data) {
+    fs.writeFile("README.md", data, err => {
         // If there is an error
         if (err) {
             return console.log(err)
