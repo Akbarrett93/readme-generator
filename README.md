@@ -15,5 +15,8 @@ Download project and install npm
 ## Usage
 Run "node index.js" to start
 
+## Questions
+Have questions? Contact me at: Email: akbarrett1993@gmail.com Github: https://github.com/Akbarrett93
+
 ## License
 This project is licensed under the MIT License - Click the button for more information.
